@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <title>myCatalogue ~</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="icon" href="https://cdn.iconscout.com/icon/free/png-256/shopping-bag-1683006-1440921.png">
+    <style>
+        .card-img-top {
+            object-fit: cover;
+            height: 250px;
+        }
+        
+        .modal .card-img-top {
+            height: inherit;
+        }
+        
+        .modal-backdrop {
+            display: none;
+        }
+        
+        .show {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-danger">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="fa fa-shopping-bag"></i> my<b>Catalogue ~</b></a>
+            <div class="form-inline">
+                <input class="form-control" type="search" onchange="onSearch(this.value)" onkeyup="onSearch(this.value)" placeholder="Search" aria-label="Search">
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mb-4">
+        <div class="mt-4">
+            <button onclick="sortPriceDescending()" class="btn btn-outline-info"><i class="fa fa-arrow-up-wide-short"></i> Harga tertinggi</button>
+            <button onclick="sortPriceAscending()" class="btn btn-outline-info"><i class="fa fa-arrow-down-short-wide"></i> Harga terendah</button>
+            <div class="form-inline d-inline-block">
+                <input type="number" class="form-control" onchange="changePriceMin(this.value)" onkeyup="changePriceMin(this.value)" placeholder="Harga minimal">
+                <input type="number" class="form-control" onchange="changePriceMax(this.value)" onkeyup="changePriceMax(this.value)" placeholder="Harga maximal">
+                <select class="form-control" onchange="changeSize(this.value)">
+                    <option value="">- All Size -</option>
+                    <option value="Small">Small</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Large">Large</option>
+                </select>
+            </div>
+            <hr>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" checked onchange="setStar(this, 1)" id="star1" value="1">
+                <label class="form-check-label" for="star1"><i class="fa fa-star text-warning"></i></label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" checked onchange="setStar(this, 2)" id="star2" value="2">
+                <label class="form-check-label" for="star2">
+                    <i class="fa fa-star text-warning"></i>
+                    <i class="fa fa-star text-warning"></i>
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" checked onchange="setStar(this, 3)" id="star3" value="3">
+                <label class="form-check-label" for="star3">
+                    <i class="fa fa-star text-warning"></i>
+                    <i class="fa fa-star text-warning"></i>
+                    <i class="fa fa-star text-warning"></i>
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" checked onchange="setStar(this, 4)" id="star4" value="4">
+                <label class="form-check-label" for="star4">
+                    <i class="fa fa-star text-warning"></i>
+                    <i class="fa fa-star text-warning"></i>
+                    <i class="fa fa-star text-warning"></i>
+                    <i class="fa fa-star text-warning"></i>
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" checked onchange="setStar(this, 5)" id="star5" value="5">
+                <label class="form-check-label" for="star5">
+                    <i class="fa fa-star text-warning"></i>
+                    <i class="fa fa-star text-warning"></i>
+                    <i class="fa fa-star text-warning"></i>
+                    <i class="fa fa-star text-warning"></i>
+                    <i class="fa fa-star text-warning"></i>
+                </label>
+            </div>
+        </div>
+
+        <div class="row" id="product-list"></div>
+    </div>
+
+    <div class="modal" id="myModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="modal-body"></div>
+                    <div id="modal-description"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-backdrop" id="modal-backdrop"></div>
+
+    <script src="./products.js"></script>
+    <script src="./catalogue.js"></script>
+</body>
+
+</html>

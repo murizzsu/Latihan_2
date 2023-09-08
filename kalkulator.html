@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-sm-6 col-md-4 offset-sm-3 offset-md-4">
+            <div class="card mt-4">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="output" readonly>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-3"><button onclick="operan('7')"
+                                class="btn btn-primary btn-lg btn-block">7</button></div>
+                        <div class="col-3"><button onclick="operan('8')"
+                                class="btn btn-primary btn-lg btn-block">8</button></div>
+                        <div class="col-3"><button onclick="operan('9')"
+                                class="btn btn-primary btn-lg btn-block">9</button></div>
+                        <div class="col-3"><button onclick="operator('/')"
+                                class="btn btn-success btn-lg btn-block">&divide;</button></div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-3"><button onclick="operan('4')"
+                                class="btn btn-primary btn-lg btn-block">4</button></div>
+                        <div class="col-3"><button onclick="operan('5')"
+                                class="btn btn-primary btn-lg btn-block">5</button></div>
+                        <div class="col-3"><button onclick="operan('6')"
+                                class="btn btn-primary btn-lg btn-block">6</button></div>
+                        <div class="col-3"><button onclick="operator('*')"
+                                class="btn btn-success btn-lg btn-block">&times;</button></div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-3"><button onclick="operan('1')"
+                                class="btn btn-primary btn-lg btn-block">1</button></div>
+                        <div class="col-3"><button onclick="operan('2')"
+                                class="btn btn-primary btn-lg btn-block">2</button></div>
+                        <div class="col-3"><button onclick="operan('3')"
+                                class="btn btn-primary btn-lg btn-block">3</button></div>
+                        <div class="col-3"><button onclick="operator('-')"
+                                class="btn btn-success btn-lg btn-block">&minus;</button></div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-3"><button onclick="reset()" class="btn btn-warning btn-lg btn-block">C</button>
+                        </div>
+                        <div class="col-3"><button onclick="operan('0')"
+                                class="btn btn-primary btn-lg btn-block">0</button></div>
+                        <div class="col-3"><button onclick="operan('.')"
+                                class="btn btn-primary btn-lg btn-block">.</button></div>
+                        <div class="col-3"><button onclick="operator('+')"
+                                class="btn btn-success btn-lg btn-block">&plus;</button></div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-12"><button onclick="operasi()"
+                                class="btn btn-success btn-lg btn-block">&equals;</button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var inputOperan1 = '';
+        var inputOperan2 = '';
+        var inputOperator = '';
+        const output = document.getElementById('output')
+
+        function reset() {
+            inputOperan1 = '';
+            inputOperan2 = '';
+            inputOperator = '';
+            output.value = '';
+        }
+        console.log(!inputOperan1)
+        function operan(number) {
+            // Memeriksa apakah inputOperan1 atau inputOperator kosong
+            if (!inputOperan1 || !inputOperator) {
+                // Memeriksa apakah nomor adalah titik desimal
+                if ((!inputOperan1 && number == '.') || (inputOperan1 && inputOperan1.indexOf(".") >= 0 && number == ".")) {
+                    return; // Menghindari penambahan titik desimal ganda
+                }
+                inputOperan1 += number; // Menambahkan nomor ke inputOperan1
+            } else if (!!inputOperator) {
+                // Memeriksa apakah inputOperan2 atau inputOperator kosong
+                if ((!inputOperan2 && number == ".") || (inputOperan2 && inputOperan2.indexOf(".") >= 0 && number == ".")) {
+                    return; // Menghindari penambahan titik desimal ganda
+                }
+                inputOperan2 += number; // Menambahkan nomor ke inputOperan2
+            }
+
+            // Menampilkan hasil operasi pada elemen output
+            output.value = inputOperan1 + inputOperator + inputOperan2;
+        }
+
+        function operator(simbol) {
+            inputOperator = simbol
+            output.value = inputOperan1 + inputOperator + inputOperan2;
+        }
+
+        function operasi() {
+            let hasil = 0
+            switch (inputOperator) {
+                case '/':
+                    hasil = parseFloat(inputOperan1) / parseFloat(inputOperan2);
+                    break;
+                case '-':
+                    hasil = parseFloat(inputOperan1) - parseFloat(inputOperan2);
+                    break;
+                case '+':
+                    hasil = parseFloat(inputOperan1) + parseFloat(inputOperan2);
+                    break;
+                case '*':
+                    hasil = parseFloat(inputOperan1) * parseFloat(inputOperan2);
+                    break;
+            }
+            reset()
+            output.value = hasil
+        }
+    </script>
+</body>
+
+</html>

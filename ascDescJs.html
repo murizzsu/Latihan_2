@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" />
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-success">
+        <a class="navbar-brand" href="#">Todo List</a>
+        <div class="form-inline">
+            <input class="form-control mr-sm-2" type="search" onkeyup="searchTodo(this.value)"
+                placeholder="Cari item todo ..." aria-label="Cari">
+        </div>
+    </nav>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12 col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Todo</h4>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" id="todo-input" placeholder="Tambah">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" onclick="addTodo()">&plus;</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="list-group list-group-flush" id="todo-list"></div>
+                    <div class="card-body">
+                        <button onclick="sortTodoAscending()" class="btn btn-link">Ascending</button>
+                        <button onclick="sortTodoDescending()" class="btn btn-link">Descending</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const todoList = ['sample todo']
+
+        function addTodo() {
+            let input = document.getElementById('todo-input')
+            input.value !== '' ? (todoList.push(input.value), input.value = '', showTodo()) : showTodo();
+
+        }
+
+        function removeTodo(n) {
+            todoList.splice(n, 1)
+            showTodo()
+        }
+
+        function sortTodoDescending() {
+            todoList.sort(function (a, b) {
+                return a === b ? 0 : a > b ? -1 : 1;
+            });
+
+            showTodo();
+
+        }
+
+        function sortTodoAscending() {
+            todoList.sort(function (a, b) {
+                return a === b ? 0 : a > b ? 1 : -1;
+            })
+            showTodo()
+        }
+        function showTodo() {
+            let todoGroup = document.getElementById('todo-list')
+            todoGroup.innerHTML = ''
+            for (let i in todoList) {
+                let template = '<div class="list-group-item"><button onclick="removeTodo(' + i + ')" class="btn btn-danger">&times;</button> ' + todoList[i] + '</div>'
+                todoGroup.innerHTML += template
+            }
+        }
+
+        function searchTodo(value) {
+            if (value === '') {
+                showTodo()
+                return
+            }
+            let regex = new RegExp(value, 'gi')
+            console.log(regex)
+            let result = []
+            for (let i in todoList) {
+                if (todoList[i].match(regex)) {
+                    result.push(todoList[i])
+                }
+            }
+            let todoGroup = document.getElementById('todo-list')// akses
+            todoGroup.innerHTML = '' // bersihkan
+
+            for (let i in result) {
+                let template = '<div class="list-group-item"><button onclick="removeTodo(' + i + ')" class="btn btn-danger">&times;</button> ' + result[i] + '</div>'
+                todoGroup.innerHTML += template
+            }
+        }
+
+        showTodo()
+    </script>
+</body>
+
+</html>

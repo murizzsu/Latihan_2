@@ -1,0 +1,11 @@
+latihan memasukan text dalam file menggunakan perintah touch, echo, cat, dan nano
+touch ( membuat file) touc file.txt
+echo>> (input text) echo "text" >> file.txt
+cat (melihat isi file) cat file.txt
+nano (edit/menabah text) nano namafile.txt
+ls (melihat file) ls .
+cd (pindah) cd ../ atau misal ingin pindah ke day1 maka cd ../Day1
+pwd (cek path) pwd
+-p (membuat folder bersarang) mkdir -p 1/2/3/folder 
+rm (mehapus file) rm 1/file.txt
+rm -r (menghapus direktori) rm -r 1
