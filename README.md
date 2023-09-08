@@ -1,0 +1,1 @@
+Latihan 2, belajar membuat kalkulator menggunakan html, bootstrap, js. Kemudian mencoba mengurutkan data json berdasarkan tahun, dan membuat catalogue yang dapat memfilter barang berdasarkan harga, ukuran, dan fitur pencarian barang menggunakan regex
